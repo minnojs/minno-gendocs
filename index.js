@@ -20,7 +20,7 @@ function gendocs(src, dest){
 
 function transform(src, dest, menu){
     if (fs.lstatSync(src).isDirectory()) {
-        try {menu = fs.readFileSync(src + '/menu.md', 'utf-8');} catch(e){e;}
+        try {menu = fs.readFileSync(src + '/menu.md', 'utf-8');} catch(e){menu = '';}
         fs.ensureDirSync(dest);
         fs.readdirSync(src).forEach(function(filename) {
             transform(src + '/' + filename, dest + '/' + filename, menu);
@@ -98,8 +98,13 @@ function transformJs(src, dest, menu){
         return match ? match[3] : filename;
     }
 
-    function escapeHtml(html){
-        return html.replace(/ /, '');
+    function escapeHtml(unsafe) {
+        return unsafe
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/'/g, '&quot;')
+        .replace(/'/g, '&#039;');
     }
 }
 
