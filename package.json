@@ -1,6 +1,6 @@
 {
   "name": "minno-gendocs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "create docs for minnojs",
   "main": "index.js",
   "bin": "./bin/gendocs.js",
