@@ -27,6 +27,7 @@ a:hover {text-decoration:underline;}
 hr {border:0;border-bottom:1px solid #ddd;margin:30px 0;}
 select {font-size:1em;color:#563d7c;border:0;background-color:#fff;display:inline-block;-webkit-appearance: none;-moz-appearance: none;appearance: none;cursor:pointer;}
 blockquote{ padding-left: 15px; border-left: 3px solid #aaa;background:#eee; } 
+blockquote p{padding:5px;}
 
 /* menu */
 h1 + ul {margin:-46px 0 0 -300px;padding:0;position:absolute;width:250px;font-size:1.17em;}
