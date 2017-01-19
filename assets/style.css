@@ -38,7 +38,7 @@ h1 + ul strong a{color:#cc7a6f;font-size:1.1em;}
 h1 + ul > li:not(:last-child) {border-bottom:1px solid #eee;}
 h1 + ul ul {margin:0.3em 0 10px;padding:0 0 0 15px;font-size:initial;}
 
-.header-link { position: relative; left: -1.4em; bottom:1em; opacity: 0; transition: opacity 0.2s ease-in-out 0.1s; -webkit-transition: opacity 0.2s ease-in-out 0.1s; -moz-transition: opacity 0.2s ease-in-out 0.1s; -ms-transition: opacity 0.2s ease-in-out 0.1s; }
+.header-link { position: relative; left: -1.4em; bottom:0.9em; opacity: 0; transition: opacity 0.2s ease-in-out 0.1s; -webkit-transition: opacity 0.2s ease-in-out 0.1s; -moz-transition: opacity 0.2s ease-in-out 0.1s; -ms-transition: opacity 0.2s ease-in-out 0.1s; }
 h2:hover .header-link, h3:hover .header-link, h4:hover .header-link, h5:hover .header-link, h6:hover .header-link { opacity: 1; }
 .header-link span { color: #000; position: absolute; margin-left: 8px; margin-top: 10px; width: 7px; height: 1px; background-color: currentColor; -webkit-transform: rotate(-45deg); transform: rotate(-45deg); }
 .header-link span:before { content: ''; position: absolute; top: -3px; left: -7px; width: 8px; height: 5px; border-radius: 2px; border: solid 1px currentColor; }

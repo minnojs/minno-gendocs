@@ -64,7 +64,7 @@ function transformMd(src, dest, menu){
         .replace(/\.js/gim, '.html'); // fix links
 
     var html = layout
-        .replace(/\[body\]/, marked(fixed));
+        .replace(/\[body\]/, marked(fixed, {renderer:getRenderer()}));
 
     fs.writeFileSync(outputFilename, html, 'utf-8');
 }
@@ -84,7 +84,7 @@ function transformJs(src, dest, menu){
         .replace(/\.md/gim, '.html') // fix links
         .replace(/\.js/gim, '.html'); // fix links
 
-    var body = marked(markdown) + playground
+    var body = marked(markdown, {renderer: getRenderer()}) + playground
         .replace(/\[editor\]/, escapeHtml(js))
         .replace(/\[filename\]/, filename);
 
@@ -103,3 +103,27 @@ function transformJs(src, dest, menu){
     }
 }
 
+function getRenderer(){
+    var renderer = new marked.Renderer();
+
+    renderer.heading = function (text, level) {
+        // from https://github.com/thlorenz/anchor-markdown-header/blob/master/anchor-markdown-header.js
+        var escapedText =  text.replace(/ /g,'-')
+            .toLowerCase()
+            // escape codes
+            .replace(/%([abcdef]|\d){2,2}/ig, '')
+            // single chars that are removed
+            .replace(/[\/?!:\[\]`.,()*"';{}+=<>~\$|#@]/g,'');
+
+        return [
+            '<h' + level + '>',
+            '<a name="' + escapedText + '" class="header-link" href="#' + escapedText + '">',
+            '<span></span>',
+            '</a>',
+            text,
+            '</h' + level + '>'
+        ].join('');
+    };
+
+    return renderer;
+} 
