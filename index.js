@@ -49,11 +49,12 @@ function transformMd(src, dest, menu){
     var outputFilename = dest.replace(/\.md$/, '.html');
     var markdown = fs.readFileSync(src, 'utf-8');
     var fixed = markdown
+        .replace(/<!--[\s\S]*?-->/g,'') // remove html comments
         .replace(/(`[^`]+?)<(.*`)/gim, '$1&lt;$2') // fix generic syntax
         .replace(/`((?:\S| -> |, )+)(\|)(\S+)`/gim, function(match, a, b, c) { // fix pipes in code tags
             return '<code>' + (a + b + c).replace(/\|/g, '&#124;') + '</code>';
         })
-        .replace(/(^# .+?(?:\r?\n){2,}?)(?:(-(?:.|\r|\n)+?)((?:\r?\n){2,})|)/m, function(match, title, nav) { // inject menu
+        .replace(/(^# .+?(?:\r?\n){2,8}?)(?:(-(?:.|\r|\n)+?)((?:\r?\n){2,})|)/m, function(match, title, nav) { // inject menu
             var file = path.basename(src);
             var link = new RegExp('([ \t]*)(- )(\\[.+?\\]\\(' + file + '\\))');
             var replace = (match, space, li, link) => space + li + '**' + link + '**' + (nav ? '\n' + nav.replace(/(^|\n)/g, '$1\t' + space) : '');
