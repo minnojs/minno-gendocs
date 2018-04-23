@@ -12,7 +12,7 @@ function gendocs(src, dest){
     dest = dest + '/' + version;
     fs.emptyDirSync(dest);
     fs.copySync(__dirname + '/assets', dest + '/assets');
-    fs.copySync('bower_components', dest + '/bower_components');
+    fs.existsSync('bower_components') && fs.copySync('bower_components', dest + '/bower_components');
     fs.copySync('dist', dest + '/dist');
     fs.copySync('package.json', dest + '/package.json');
     transform(src,dest);
